@@ -6,8 +6,9 @@ import camera from '../assets/images/camera.jpg'
 import { TextInput } from 'react-native-gesture-handler'
 import { useEffect } from 'react'
 import { Keyboard } from 'react-native'
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux'
+import { Colors, StyledContainer } from '../config/styles'
 
 function Login({email,setEmail, password, setPsd, isSecure, setSecure}){
   return(
@@ -77,7 +78,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure}){
                       }}
                     >
                     <View>
-                    <Text style={{fontWeigh:'700'}}>Forgot password? </Text>
+                    <Text style={{fontWeight:'700'}}>Forgot password? </Text>
                     </View>
                     <View>
                       <TouchableOpacity>
@@ -240,104 +241,39 @@ export default function Account({navigation}) {
           
           showsVerticalScrollIndicator={false}
         >
-          <ImageBackground 
-            source={camera}
-            style={{height:Dimensions.get('window').height/2.5}}
-            blurRadius={5}>
-              <View
-                style={styles.brandContainer}
-              >
-                <Image
-                  source={require('../assets/icons/tv.png')}
-                  style={{width:80,height:80}}
-                 />
-              </View>
-          </ImageBackground>
-          {/**Bottom View */}
-          <View style={styles.bottomView}>
-            {/**Welcome View */}
-            <View
-              style={{padding:30}}
+          <SafeAreaView>
+          <View
+              style={{
+                alignSelf:'flex-end',
+                margin:10
+              }}
             >
-                <Text style={{
-                  color:'grey',
-                  alignItems:'center',
-                  justifyContent:'center', 
-                  alignSelf:'center', 
-                  fontSize:30, 
-                  fontWeight:'600',
-                  marginBottom:10
-                }}>RGC FLIX</Text>
-                <View
-                  style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}
-                >
-                    <View>
-                      {
-                        isLogin?(
-                          <Text style={{fontWeight:'800', alignSelf:'center'}}>
-                          Don't have an account?
-                          </Text>
-                        ):(
-                          <Text style={{fontWeight:'800', alignSelf:'center'}}>
-                          Already have an account?
-                          </Text>
-                        )
-                      } 
-                    </View>
-                    <View>
-                      <TouchableOpacity
-                        onPress={()=>{setIsLogin(!isLogin)}}
-                      >
-                        
-                            <>
-                                  {
-                              isLogin?(
-                                    <Text style={{fontSize:15,fontWeight:'600',color:'#0077b5', fontStyle:'italic'}}>
-                                {' '}
-                                Register Now
-                              </Text>
-                                  ):(
-                                    <Text style={{fontSize:15,fontWeight:'600',color:'#0077b5', fontStyle:'italic'}}>
-                                {' '}
-                                Login Now
-                              </Text>
-                                )}
-                            </>
-                          
-                        
-                      
-                      </TouchableOpacity>
-                    
-                    </View>
-                </View>
-                
-                    
-                      
-                 
-                  
-                
-                {/***Form Inputs */}
-                {
-                  isLogin?(
-                    <Login 
-                      email={email} 
-                      setEmail={setEmail}
-                      password={password}
-                      setPsd={setPsd}
-                      isSecure={isSecure} 
-                      setSecure={setSecure}/>
-                  ):(
-                    <Register 
-                      email={email} 
-                      setEmail={setEmail}
-                      password={password}
-                      setPsd={setPsd} 
-                      isSecure={isSecure} 
-                      setSecure={setSecure}/>
-                  ) 
-                }
+              <TouchableOpacity
+                style={{
+                  width:40,
+                  height:40,
+                  borderRadius:20,
+                  backgroundColor:'lightgray',
+                  alignItems:'center'
+                }}
+                onPress={()=>{navigation.replace('Home')}}
+              >
+              <Ionicons
+                name="close-outline"
+                size={35}
+                color='grey'
+                style={{alignSelf:'center'}}
+              />
+              </TouchableOpacity>
             </View>
-          </View>
+            <View
+              style={styles.container}
+            >
+              
+            
+            </View>
+      
+          </SafeAreaView>
         </ScrollView>
         
     
@@ -348,7 +284,9 @@ const styles = StyleSheet.create({
   container:{
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor:'white'
+    flex:1,
+    padding:25,
+    backgroundColor: Colors.primary
   },
   brandContainer:{
     justifyContent:'center', 

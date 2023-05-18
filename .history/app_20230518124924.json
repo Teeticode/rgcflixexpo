@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "RgcStreamFlix",
+    "slug": "RgcStreamFlix",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/icons/tv.png",
+      "resizeMode": "cover",
+      "backgroundColor": "skyblue",
+      "width":"20",
+      "height":"20"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.teeti.RgcStreamFlix"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2f635f57-8275-499b-94ad-a7e049aee3d7"
+      }
+    }
+  }
+}

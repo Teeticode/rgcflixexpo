@@ -9,6 +9,7 @@ export default function Home({navigation}) {
     <SafeAreaView>
      
         <View>
+          
     </View>
     </SafeAreaView>
     
