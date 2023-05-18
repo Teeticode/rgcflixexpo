@@ -314,7 +314,6 @@ export default function Account({navigation}) {
 const MyTextInput = ({label, icon, ...props})=>{
   return(
     <View>
-      <Text style={styles.myInputLabel}>email</Text>
       <TextInput style={styles.myInput}/>
     </View>
   )
@@ -361,21 +360,5 @@ const styles = StyleSheet.create({
     color:Colors.tertiay,
     fontSize:13,
     textAlign:'left'
-  },
-  LeftIcon:{
-    left:15,
-    top:35,
-    position:'absolute',
-    zIndex:1
-  },
-  RightIcon:{
-    right:15,
-    top:35,
-    position:'absolute',
-    zIndex:1
-  },
-  StyledButton:{
-    padding:15,
-    
   }
 })

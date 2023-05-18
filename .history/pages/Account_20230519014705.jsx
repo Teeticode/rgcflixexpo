@@ -292,7 +292,7 @@ export default function Account({navigation}) {
                     >
                       {({handleChange, handleBlur, handleSubmit, values})=>(
                         <View
-                        style={{width:'100%'}}
+                        style={{width:'90%'}}
                       >
                         <MyTextInput/>
                         </View>
@@ -314,7 +314,6 @@ export default function Account({navigation}) {
 const MyTextInput = ({label, icon, ...props})=>{
   return(
     <View>
-      <Text style={styles.myInputLabel}>email</Text>
       <TextInput style={styles.myInput}/>
     </View>
   )
@@ -349,7 +348,7 @@ const styles = StyleSheet.create({
   },
   myInput:{
     backgroundColor:Colors.secondary,
-    padding:10,
+    padding:15,
     borderRadius:5,
     fontSize:16,
     height:60,
@@ -361,21 +360,5 @@ const styles = StyleSheet.create({
     color:Colors.tertiay,
     fontSize:13,
     textAlign:'left'
-  },
-  LeftIcon:{
-    left:15,
-    top:35,
-    position:'absolute',
-    zIndex:1
-  },
-  RightIcon:{
-    right:15,
-    top:35,
-    position:'absolute',
-    zIndex:1
-  },
-  StyledButton:{
-    padding:15,
-    
   }
 })

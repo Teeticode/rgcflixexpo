@@ -51,10 +51,15 @@ const App = () => {
         }
         }}>
         <Stack.Screen name='Account' component={Account} />
-        <Stack.Screen name='Home' component={Home} />
-      
       </Stack.Navigator>
-      
+      <Stack.Navigator initialRouteName='Home' screenOptions={{
+        headerShown:false,
+        cardStyle:{
+          backgroundColor:'white'
+        }
+        }}>
+        <Stack.Screen name='Home' component={Home} />
+      </Stack.Navigator>
     </NavigationContainer>
     </Provider>
     

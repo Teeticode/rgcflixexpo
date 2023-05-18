@@ -12,7 +12,6 @@ import { Colors, StyledContainer } from '../config/styles'
 import { SvgCssUri } from 'react-native-svg';
 import stream from '../assets/images/stream.png'
 import { StatusBar } from 'expo-status-bar'
-import { Formik } from 'formik'
 function Login({email,setEmail, password, setPsd, isSecure, setSecure}){
   return(
     <View style={{marginTop: 40}}>
@@ -249,7 +248,7 @@ export default function Account({navigation}) {
             <View
                 style={{
                   alignSelf:'flex-end',
-                  margin:6
+                  margin:5
                 }}
               >
                 <TouchableOpacity
@@ -283,22 +282,6 @@ export default function Account({navigation}) {
                   />
                   <Text style={styles.pageTitle}>Stream Fast</Text>
                   <Text style={styles.subTitle}>Account Login</Text>
-                  
-                    <Formik
-                      initialValues={{email:'', password:''}}
-                      onSubmit={(values)=>{
-                        console.log(values)
-                      }}
-                    >
-                      {({handleChange, handleBlur, handleSubmit, values})=>(
-                        <View
-                        style={{width:'100%'}}
-                      >
-                        <MyTextInput/>
-                        </View>
-                      )}
-                    </Formik>
-                  
                 </View>
               </ScrollView>
               
@@ -311,14 +294,6 @@ export default function Account({navigation}) {
     
   )
 }
-const MyTextInput = ({label, icon, ...props})=>{
-  return(
-    <View>
-      <Text style={styles.myInputLabel}>email</Text>
-      <TextInput style={styles.myInput}/>
-    </View>
-  )
-} 
 
 const styles = StyleSheet.create({
   container:{
@@ -346,36 +321,5 @@ const styles = StyleSheet.create({
     letterSpacing:1,
     fontWeight:'bold',
     color:Colors.tertiay
-  },
-  myInput:{
-    backgroundColor:Colors.secondary,
-    padding:10,
-    borderRadius:5,
-    fontSize:16,
-    height:60,
-    marginVertical:3,
-    marginBottom:10,
-    color:Colors.tertiay
-  },
-  myInputLabel:{
-    color:Colors.tertiay,
-    fontSize:13,
-    textAlign:'left'
-  },
-  LeftIcon:{
-    left:15,
-    top:35,
-    position:'absolute',
-    zIndex:1
-  },
-  RightIcon:{
-    right:15,
-    top:35,
-    position:'absolute',
-    zIndex:1
-  },
-  StyledButton:{
-    padding:15,
-    
   }
 })
