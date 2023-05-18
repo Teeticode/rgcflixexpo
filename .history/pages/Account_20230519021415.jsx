@@ -331,19 +331,10 @@ const MyTextInput = ({label, icon, ...props})=>{
     >
       <Octicons name={icon} style={styles.LeftIcon} size={25}/>
       <Text style={styles.myInputLabel}>{label}</Text>
-      {
-        label==='Password'?(
-          <TextInput style={styles.myInput} {...props} secureTextEntry={true} />
-        ):(
-          <TextInput style={styles.myInput} {...props} />
-        )
-      }
-      
+      <TextInput style={styles.myInput} {...props}/>
       {
         label === 'Password'&&(
-          <TouchableOpacity style={styles.RightIcon}>
-            <Ionicons name='eye' color='grey' size={25} />
-          </TouchableOpacity>
+          <Octicons name='eye' size={25} style={styles.RightIcon}/>
         )
       }
     </View>
@@ -403,7 +394,7 @@ const styles = StyleSheet.create({
   },
   RightIcon:{
     right:15,
-    top:40,
+    top:45,
     position:'absolute',
     zIndex:1
   },
@@ -413,12 +404,10 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     borderRadius:5,
     marginVertical:5,
-    height:60,
-    width:'50%'
+    height:60
   },
   buttonText:{
     color:Colors.primary,
-    fontSize:16,
-    alignSelf:'center'
+    fontSize:16
   }
 })

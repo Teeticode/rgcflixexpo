@@ -292,19 +292,9 @@ export default function Account({navigation}) {
                     >
                       {({handleChange, handleBlur, handleSubmit, values})=>(
                         <View
-                        style={{
-                          width:'100%',
-                          alignItems:'center',
-                          justifyContent:'center'
-                        }}
+                        style={{width:'100%'}}
                       >
                         <MyTextInput icon='mail' label='Email'/>
-                        <MyTextInput icon='key' label='Password'/>
-                        <TouchableOpacity
-                          style={styles.StyledButton}
-                        >
-                          <Text style={styles.buttonText}>Login</Text>
-                        </TouchableOpacity>
                         </View>
                       )}
                     </Formik>
@@ -325,27 +315,12 @@ const MyTextInput = ({label, icon, ...props})=>{
   return(
     <View
       style={{
-        width:'80%',
-        
+        width:'80%'
       }}
     >
-      <Octicons name={icon} style={styles.LeftIcon} size={25}/>
-      <Text style={styles.myInputLabel}>{label}</Text>
-      {
-        label==='Password'?(
-          <TextInput style={styles.myInput} {...props} secureTextEntry={true} />
-        ):(
-          <TextInput style={styles.myInput} {...props} />
-        )
-      }
       
-      {
-        label === 'Password'&&(
-          <TouchableOpacity style={styles.RightIcon}>
-            <Ionicons name='eye' color='grey' size={25} />
-          </TouchableOpacity>
-        )
-      }
+      <Text style={styles.myInputLabel}>{label}</Text>
+      <TextInput style={styles.myInput} {...props}/>
     </View>
   )
 } 
@@ -397,13 +372,13 @@ const styles = StyleSheet.create({
   },
   LeftIcon:{
     left:15,
-    top:40,
+    top:35,
     position:'absolute',
     zIndex:1
   },
   RightIcon:{
     right:15,
-    top:40,
+    top:35,
     position:'absolute',
     zIndex:1
   },
@@ -413,12 +388,10 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     borderRadius:5,
     marginVertical:5,
-    height:60,
-    width:'50%'
+    height:60
   },
   buttonText:{
     color:Colors.primary,
-    fontSize:16,
-    alignSelf:'center'
+    fontSize:16
   }
 })

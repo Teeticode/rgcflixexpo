@@ -331,18 +331,11 @@ const MyTextInput = ({label, icon, ...props})=>{
     >
       <Octicons name={icon} style={styles.LeftIcon} size={25}/>
       <Text style={styles.myInputLabel}>{label}</Text>
-      {
-        label==='Password'?(
-          <TextInput style={styles.myInput} {...props} secureTextEntry={true} />
-        ):(
-          <TextInput style={styles.myInput} {...props} />
-        )
-      }
-      
+      <TextInput style={styles.myInput} {...props}/>
       {
         label === 'Password'&&(
           <TouchableOpacity style={styles.RightIcon}>
-            <Ionicons name='eye' color='grey' size={25} />
+            <Ionicons name='eye-outline' size={25} />
           </TouchableOpacity>
         )
       }
