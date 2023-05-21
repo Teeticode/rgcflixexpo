@@ -133,9 +133,6 @@ export default function Account({navigation}) {
   const dispatch = useDispatch();
   const {loading, error, } = useSelector(state=>state.auth)
   
-  useEffect(()=>{
-    
-  })
   return (
    
        
@@ -148,7 +145,7 @@ export default function Account({navigation}) {
             <View
                 style={{
                   alignSelf:'flex-end',
-                  margin:6,
+                  margin:6
                 }}
               >
                 <TouchableOpacity
@@ -185,25 +182,17 @@ export default function Account({navigation}) {
                   />
                   <Text style={styles.pageTitle}>Stream Fast</Text>
                   {
-                    isLogin==='Login' &&(
+                    isLogin?(
                       <Text style={styles.subTitle}>Account Login</Text>
-                    )
-                  }
-                  {
-                    isLogin==='Register' &&(
+                    ):(
                       <Text style={styles.subTitle}>Account Register</Text>
-                    )
-                  }
-                  {
-                    isLogin==='Reset' &&(
-                      <Text style={styles.subTitle}>Account Reset</Text>
                     )
                   }
                   
                  </View>
                   
                   {
-                    isLogin === 'Login' &&(
+                    isLogin === 'Login' ?(
                     
                        <Login 
                         email={email}
@@ -219,6 +208,17 @@ export default function Account({navigation}) {
                       />
                    
                      
+                    ):(
+                      
+                      <ResetMail
+                        email={email}
+                        setEmail={setEmail} 
+                        isReset={isReset}
+                        setIsReset={setIsReset}
+                        setIsLogin={setIsLogin}
+                        isLogin={isLogin}
+                      />
+                    
                     )
                   }
                   {
@@ -230,18 +230,6 @@ export default function Account({navigation}) {
                         setPsd={setPsd}
                         isSecure={isSecure}
                         setSecure={setSecure}
-                        setIsLogin={setIsLogin}
-                        isLogin={isLogin}
-                      />
-                    )
-                  }
-                   {
-                  isLogin === 'Reset' &&(
-                      <ResetMail
-                        email={email}
-                        setEmail={setEmail} 
-                        isReset={isReset}
-                        setIsReset={setIsReset}
                         setIsLogin={setIsLogin}
                         isLogin={isLogin}
                       />
@@ -355,7 +343,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:16
+    marginRight:10
   },
   buttonText:{
     color:Colors.primary,

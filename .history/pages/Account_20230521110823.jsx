@@ -149,6 +149,7 @@ export default function Account({navigation}) {
                 style={{
                   alignSelf:'flex-end',
                   margin:6,
+                  position:'absolute'
                 }}
               >
                 <TouchableOpacity
@@ -355,7 +356,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:16
+    marginRight:10
   },
   buttonText:{
     color:Colors.primary,

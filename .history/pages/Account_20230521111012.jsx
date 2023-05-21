@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:16
+    marginRight:15
   },
   buttonText:{
     color:Colors.primary,

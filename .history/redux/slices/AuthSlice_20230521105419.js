@@ -20,14 +20,14 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
     'loginUser',
     async (body)=>{
-        const result = await fetchPost('users/login', body);
+        const result = await fetchPost('login', body);
         return result;
     }
 )
 export const checkMail = createAsyncThunk(
     'checkMail',
     async (body)=>{
-        const result = await fetchPost('users/checkmail', body);
+        const result = await fetchPost('checkmail', body);
         return result;
     }
 )

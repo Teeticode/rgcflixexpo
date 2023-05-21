@@ -33,7 +33,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
         <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} setSecure={setSecure} placeholder='password'/>
         <View>
           <TouchableOpacity onPress={()=>{setIsLogin('Reset')}}>
-            <Text style={{fontWeight:'800', alignSelf:'flex-start'}}>Forgot Password? <Text style={{color:'#0077b5'}}>Reset</Text></Text>
+            <Text style={{fontWeight:'800', alignSelf:'flex-start'}}>Forgot Passwordv? <Text style={{color:'#0077b5'}}>Reset</Text></Text>
           </TouchableOpacity>
         </View>
         <View style={{marginTop:10, marginBottom:20}}>
@@ -133,9 +133,6 @@ export default function Account({navigation}) {
   const dispatch = useDispatch();
   const {loading, error, } = useSelector(state=>state.auth)
   
-  useEffect(()=>{
-    
-  })
   return (
    
        
@@ -148,7 +145,7 @@ export default function Account({navigation}) {
             <View
                 style={{
                   alignSelf:'flex-end',
-                  margin:6,
+                  margin:6
                 }}
               >
                 <TouchableOpacity
@@ -185,18 +182,10 @@ export default function Account({navigation}) {
                   />
                   <Text style={styles.pageTitle}>Stream Fast</Text>
                   {
-                    isLogin==='Login' &&(
+                    isLogin?(
                       <Text style={styles.subTitle}>Account Login</Text>
-                    )
-                  }
-                  {
-                    isLogin==='Register' &&(
+                    ):(
                       <Text style={styles.subTitle}>Account Register</Text>
-                    )
-                  }
-                  {
-                    isLogin==='Reset' &&(
-                      <Text style={styles.subTitle}>Account Reset</Text>
                     )
                   }
                   
@@ -230,18 +219,6 @@ export default function Account({navigation}) {
                         setPsd={setPsd}
                         isSecure={isSecure}
                         setSecure={setSecure}
-                        setIsLogin={setIsLogin}
-                        isLogin={isLogin}
-                      />
-                    )
-                  }
-                   {
-                  isLogin === 'Reset' &&(
-                      <ResetMail
-                        email={email}
-                        setEmail={setEmail} 
-                        isReset={isReset}
-                        setIsReset={setIsReset}
                         setIsLogin={setIsLogin}
                         isLogin={isLogin}
                       />
@@ -355,7 +332,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:16
+    marginRight:10
   },
   buttonText:{
     color:Colors.primary,

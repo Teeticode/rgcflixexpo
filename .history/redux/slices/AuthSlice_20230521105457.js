@@ -27,7 +27,7 @@ export const loginUser = createAsyncThunk(
 export const checkMail = createAsyncThunk(
     'checkMail',
     async (body)=>{
-        const result = await fetchPost('users/checkmail', body);
+        const result = await fetchPost('checkmail', body);
         return result;
     }
 )

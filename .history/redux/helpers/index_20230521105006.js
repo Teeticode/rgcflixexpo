@@ -1,5 +1,5 @@
 import SensitiveInfo from 'react-native-sensitive-info';
-const url = 'https://rgcstreamapp.onrender.com/api/v1/';
+const url = 'https://rgcstreamapp.onrender.com/api/v1';
 
 export const fetchPost = async(api, body)=>{
     const res = await fetch(url+api,{

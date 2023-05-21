@@ -13,7 +13,7 @@ import { SvgCssUri } from 'react-native-svg';
 import stream from '../assets/images/stream.png'
 import { StatusBar } from 'expo-status-bar'
 import { Formik } from 'formik'
-function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogin, isLogin, isReset, setIsReset}){
+function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogin, isLogin}){
   return(
     <Formik
       initialValues={{email:'', password:''}}
@@ -31,14 +31,9 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
       >
         <MyTextInput icon='mail' label='Email' placeholder='johndoe@gmail.com'/>
         <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} setSecure={setSecure} placeholder='password'/>
-        <View>
-          <TouchableOpacity onPress={()=>{setIsLogin('Reset')}}>
-            <Text style={{fontWeight:'800', alignSelf:'flex-start'}}>Forgot Password? <Text style={{color:'#0077b5'}}>Reset</Text></Text>
-          </TouchableOpacity>
-        </View>
         <View style={{marginTop:10, marginBottom:20}}>
           <TouchableOpacity
-            onPress={()=>{setIsLogin('Register')}}
+            onPress={()=>{setIsLogin(!isLogin)}}
           >
           <Text style={{fontWeight:'800'}}>Dont Have An Account? <Text style={{color:'#0077b5'}}>Register</Text></Text>
           </TouchableOpacity>
@@ -74,7 +69,7 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
         <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} setSecure={setSecure} placeholder='password'/>
         <View style={{marginTop:10, marginBottom:20}}>
           <TouchableOpacity
-            onPress={()=>{setIsLogin('Login')}}
+            onPress={()=>{setIsLogin(!isLogin)}}
           >
           <Text style={{fontWeight:'800'}}>Already Have An Account? <Text style={{color:'#0077b5'}}>Login</Text></Text>
           </TouchableOpacity>
@@ -89,53 +84,57 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
     </Formik>
   )
 }
-function ResetMail({email,setEmail, isReset, setIsReset, isLogin, setIsLogin}){
+function ResetMail({email,setEmail, isReset, setReseting}){
   return(
-    <Formik
-      initialValues={{email:'', password:''}}
-      onSubmit={(values)=>{
-        console.log(values)
-      }}
-    >
-      {({handleChange, handleBlur, handleSubmit, values})=>(
-        <View
-        style={{
-          width:'100%',
-          alignItems:'center',
-          justifyContent:'center'
-        }}
-      >
-        <MyTextInput icon='mail' label='Email' placeholder='johndoe@gmail.com'/>
-        <View style={{marginTop:10, marginBottom:20}}>
-          <TouchableOpacity
-            onPress={()=>{setIsLogin('Login')}}
-          >
-          <Text style={{fontWeight:'800'}}>Already Have An Account? <Text style={{color:'#0077b5'}}>Login</Text></Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity
-          style={styles.StyledButton}
-        >
-          <Text style={styles.buttonText}>Reset Password</Text>
-        </TouchableOpacity>
-        </View>
-      )}
-    </Formik>
+    <View style={{marginTop: 40}}>
+                  <View>
+                    <View
+                      style={{
+                        borderColor:'gray', 
+                        borderWidth:1, 
+                        borderRadius:10,
+                        padding:8,
+                        marginBottom:20
+                      }}
+                    >
+                      <TextInput 
+                        editable
+                        onChangeText={text=>setEmail(text)}
+                        value={email}
+                        style={{padding:10, fontSize:17, fontWeight:'900'}}
+                        placeholder='johndoe@gmail.com'
+                      />
+                    </View>
+                    
+                    
+                    <TouchableOpacity
+                      style={{
+                        alignItems:'center',
+                        justifyContent:'center',
+                        marginTop:35,
+                        marginLeft:Dimensions.get('window').width/6,
+                        backgroundColor:'#0077b5',
+                        padding:18, 
+                        color:'white',
+                        width:Dimensions.get('window').width/2
+                      }}
+                    >
+                      <Text style={{color:'white', fontSize:15, fontWeight:'900'}}>Send </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
   )
 }
 export default function Account({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPsd] = useState('');
   const [keyboardStatus, setKeyboardStatus] = useState('');
-  const [isLogin, setIsLogin] = useState('Login');
+  const [isLogin, setIsLogin] = useState(false);
   const [isReset, setIsReset] = useState(false)
   const [isSecure, setSecure] = useState(true);
   const dispatch = useDispatch();
   const {loading, error, } = useSelector(state=>state.auth)
   
-  useEffect(()=>{
-    
-  })
   return (
    
        
@@ -148,7 +147,7 @@ export default function Account({navigation}) {
             <View
                 style={{
                   alignSelf:'flex-end',
-                  margin:6,
+                  margin:6
                 }}
               >
                 <TouchableOpacity
@@ -185,44 +184,31 @@ export default function Account({navigation}) {
                   />
                   <Text style={styles.pageTitle}>Stream Fast</Text>
                   {
-                    isLogin==='Login' &&(
+                    isLogin?(
                       <Text style={styles.subTitle}>Account Login</Text>
-                    )
-                  }
-                  {
-                    isLogin==='Register' &&(
+                    ):(
                       <Text style={styles.subTitle}>Account Register</Text>
-                    )
-                  }
-                  {
-                    isLogin==='Reset' &&(
-                      <Text style={styles.subTitle}>Account Reset</Text>
                     )
                   }
                   
                  </View>
                   
                   {
-                    isLogin === 'Login' &&(
-                    
-                       <Login 
+                    isLogin&&(
+                      <Login 
                         email={email}
                         setEmail={setEmail} 
                         password={password}
                         setPsd={setPsd}
-                        isReset={isReset}
-                        setIsReset={setIsReset}
                         isSecure={isSecure}
                         setSecure={setSecure}
                         setIsLogin={setIsLogin}
                         isLogin={isLogin}
                       />
-                   
-                     
                     )
                   }
                   {
-                    isLogin === 'Register' &&(
+                    !isLogin&&(
                       <Register
                         email={email}
                         setEmail={setEmail} 
@@ -235,19 +221,6 @@ export default function Account({navigation}) {
                       />
                     )
                   }
-                   {
-                  isLogin === 'Reset' &&(
-                      <ResetMail
-                        email={email}
-                        setEmail={setEmail} 
-                        isReset={isReset}
-                        setIsReset={setIsReset}
-                        setIsLogin={setIsLogin}
-                        isLogin={isLogin}
-                      />
-                    )
-                  }
-                 
                   
                 </View>
               </ScrollView>
@@ -355,7 +328,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:16
+    marginRight:10
   },
   buttonText:{
     color:Colors.primary,

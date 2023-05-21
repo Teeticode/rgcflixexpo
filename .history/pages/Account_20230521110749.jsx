@@ -134,7 +134,7 @@ export default function Account({navigation}) {
   const {loading, error, } = useSelector(state=>state.auth)
   
   useEffect(()=>{
-    
+
   })
   return (
    
@@ -149,6 +149,7 @@ export default function Account({navigation}) {
                 style={{
                   alignSelf:'flex-end',
                   margin:6,
+                  position:'absolute'
                 }}
               >
                 <TouchableOpacity
@@ -183,20 +184,20 @@ export default function Account({navigation}) {
                   }}
                   source={stream}
                   />
-                  <Text style={styles.pageTitle}>Stream Fast</Text>
+                 
                   {
                     isLogin==='Login' &&(
                       <Text style={styles.subTitle}>Account Login</Text>
                     )
                   }
                   {
-                    isLogin==='Register' &&(
-                      <Text style={styles.subTitle}>Account Register</Text>
+                    isLogin==='Registe' &&(
+                      <Text style={styles.subTitle}>Account Login</Text>
                     )
                   }
                   {
-                    isLogin==='Reset' &&(
-                      <Text style={styles.subTitle}>Account Reset</Text>
+                    isLogin==='Login' &&(
+                      <Text style={styles.subTitle}>Account Login</Text>
                     )
                   }
                   
@@ -355,7 +356,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:16
+    marginRight:10
   },
   buttonText:{
     color:Colors.primary,

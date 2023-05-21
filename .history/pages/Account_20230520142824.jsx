@@ -13,7 +13,7 @@ import { SvgCssUri } from 'react-native-svg';
 import stream from '../assets/images/stream.png'
 import { StatusBar } from 'expo-status-bar'
 import { Formik } from 'formik'
-function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogin, isLogin, isReset, setIsReset}){
+function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogin, isLogin}){
   return(
     <Formik
       initialValues={{email:'', password:''}}
@@ -31,14 +31,9 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
       >
         <MyTextInput icon='mail' label='Email' placeholder='johndoe@gmail.com'/>
         <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} setSecure={setSecure} placeholder='password'/>
-        <View>
-          <TouchableOpacity onPress={()=>{setIsLogin('Reset')}}>
-            <Text style={{fontWeight:'800', alignSelf:'flex-start'}}>Forgot Password? <Text style={{color:'#0077b5'}}>Reset</Text></Text>
-          </TouchableOpacity>
-        </View>
         <View style={{marginTop:10, marginBottom:20}}>
           <TouchableOpacity
-            onPress={()=>{setIsLogin('Register')}}
+            onPress={()=>{setIsLogin(!isLogin)}}
           >
           <Text style={{fontWeight:'800'}}>Dont Have An Account? <Text style={{color:'#0077b5'}}>Register</Text></Text>
           </TouchableOpacity>
@@ -74,7 +69,7 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
         <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} setSecure={setSecure} placeholder='password'/>
         <View style={{marginTop:10, marginBottom:20}}>
           <TouchableOpacity
-            onPress={()=>{setIsLogin('Login')}}
+            onPress={()=>{setIsLogin(!isLogin)}}
           >
           <Text style={{fontWeight:'800'}}>Already Have An Account? <Text style={{color:'#0077b5'}}>Login</Text></Text>
           </TouchableOpacity>
@@ -89,7 +84,7 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
     </Formik>
   )
 }
-function ResetMail({email,setEmail, isReset, setIsReset, isLogin, setIsLogin}){
+function ResetMail({email,setEmail, isReset, setReseting, isLogin, setIsLogin}){
   return(
     <Formik
       initialValues={{email:'', password:''}}
@@ -106,9 +101,10 @@ function ResetMail({email,setEmail, isReset, setIsReset, isLogin, setIsLogin}){
         }}
       >
         <MyTextInput icon='mail' label='Email' placeholder='johndoe@gmail.com'/>
+        <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} setSecure={setSecure} placeholder='password'/>
         <View style={{marginTop:10, marginBottom:20}}>
           <TouchableOpacity
-            onPress={()=>{setIsLogin('Login')}}
+            onPress={()=>{setIsLogin(!isLogin)}}
           >
           <Text style={{fontWeight:'800'}}>Already Have An Account? <Text style={{color:'#0077b5'}}>Login</Text></Text>
           </TouchableOpacity>
@@ -116,26 +112,53 @@ function ResetMail({email,setEmail, isReset, setIsReset, isLogin, setIsLogin}){
         <TouchableOpacity
           style={styles.StyledButton}
         >
-          <Text style={styles.buttonText}>Reset Password</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         </View>
       )}
     </Formik>
+      initialValues={{email:'', password:''}}
+      onSubmit={(values)=>{
+        console.log(values)
+      }}
+    >
+      {({handleChange, handleBlur, handleSubmit, values})=>(
+        <View
+        style={{
+          width:'100%',
+          alignItems:'center',
+          justifyContent:'center'
+        }}
+      >
+        <MyTextInput icon='mail' label='Email' placeholder='johndoe@gmail.com'/>
+        <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} setSecure={setSecure} placeholder='password'/>
+        <View style={{marginTop:10, marginBottom:20}}>
+          <TouchableOpacity
+            onPress={()=>{setIsLogin(!isLogin)}}
+          >
+          <Text style={{fontWeight:'800'}}>Already Have An Account? <Text style={{color:'#0077b5'}}>Login</Text></Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          style={styles.StyledButton}
+        >
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        </View>
+      )}
+    <
   )
 }
 export default function Account({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPsd] = useState('');
   const [keyboardStatus, setKeyboardStatus] = useState('');
-  const [isLogin, setIsLogin] = useState('Login');
+  const [isLogin, setIsLogin] = useState(false);
   const [isReset, setIsReset] = useState(false)
   const [isSecure, setSecure] = useState(true);
   const dispatch = useDispatch();
   const {loading, error, } = useSelector(state=>state.auth)
   
-  useEffect(()=>{
-    
-  })
   return (
    
        
@@ -148,7 +171,7 @@ export default function Account({navigation}) {
             <View
                 style={{
                   alignSelf:'flex-end',
-                  margin:6,
+                  margin:6
                 }}
               >
                 <TouchableOpacity
@@ -185,44 +208,31 @@ export default function Account({navigation}) {
                   />
                   <Text style={styles.pageTitle}>Stream Fast</Text>
                   {
-                    isLogin==='Login' &&(
+                    isLogin?(
                       <Text style={styles.subTitle}>Account Login</Text>
-                    )
-                  }
-                  {
-                    isLogin==='Register' &&(
+                    ):(
                       <Text style={styles.subTitle}>Account Register</Text>
-                    )
-                  }
-                  {
-                    isLogin==='Reset' &&(
-                      <Text style={styles.subTitle}>Account Reset</Text>
                     )
                   }
                   
                  </View>
                   
                   {
-                    isLogin === 'Login' &&(
-                    
-                       <Login 
+                    isLogin&&(
+                      <Login 
                         email={email}
                         setEmail={setEmail} 
                         password={password}
                         setPsd={setPsd}
-                        isReset={isReset}
-                        setIsReset={setIsReset}
                         isSecure={isSecure}
                         setSecure={setSecure}
                         setIsLogin={setIsLogin}
                         isLogin={isLogin}
                       />
-                   
-                     
                     )
                   }
                   {
-                    isLogin === 'Register' &&(
+                    !isLogin&&(
                       <Register
                         email={email}
                         setEmail={setEmail} 
@@ -235,19 +245,18 @@ export default function Account({navigation}) {
                       />
                     )
                   }
-                   {
-                  isLogin === 'Reset' &&(
+                  {
+                    isReset&&(
                       <ResetMail
                         email={email}
                         setEmail={setEmail} 
                         isReset={isReset}
-                        setIsReset={setIsReset}
+                        setReseting={setIsReset}
                         setIsLogin={setIsLogin}
                         isLogin={isLogin}
                       />
                     )
                   }
-                 
                   
                 </View>
               </ScrollView>
@@ -355,7 +364,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:16
+    marginRight:10
   },
   buttonText:{
     color:Colors.primary,
