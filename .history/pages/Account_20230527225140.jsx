@@ -117,9 +117,6 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
         email:email,
         password:password
       }
-    }).then(res=>res.json())
-    .then((data)=>{
-      
     })
   }
 

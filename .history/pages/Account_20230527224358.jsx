@@ -108,19 +108,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
 }
 function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLogin, isLogin}){
   const Reg = ()=>{
-    fetch('https://rgcstreamapp.onrender.com/api/v1/users/register',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:{
-        email:email,
-        password:password
-      }
-    }).then(res=>res.json())
-    .then((data)=>{
-      
-    })
+    fetch('https://rgcstreamapp.onrender.com/api/v1/users/register')
   }
 
   return(

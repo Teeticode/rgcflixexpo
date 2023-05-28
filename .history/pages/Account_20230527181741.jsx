@@ -16,36 +16,10 @@ import { Formik } from 'formik'
 import { loginUser } from '../redux/slices/AuthSlice'
 function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogin, isLogin, isReset, setIsReset}){
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false)
-  const [user, setUser] = useState(null)
-  const [error, setError] = useState('')
   const Login = ()=>{
-    setLoading(true)
-    fetch('https://rgcstreamapp.onrender.com/api/v1/users/login',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:{
-        email:email,
-        password:password
-      }
-    }).then(res=>res.json())
-    .then((data)=>{
-      setLoading(false)
-      console.log(data)
-      if(data.error){
-        setError(data.error)
-      }else{
-        setError(null)
-        console.log(data)
-      }
-    })
-    .catch(err=>{
-      console.log(err)
-    })
-    
+    dispatch(loginUser({email,password}))
   }
+  const {error, loading, user} = useSelector(state=>state.auth)
   return(
     <View
     >
@@ -67,17 +41,8 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
         
         {
           error&&(
-            <View
-              style={{
-                alignItems:'center',
-                justifyContent:'center',
-                marginBottom:20
-              }}
-            >
-              <Text style={{
-                color:'#990F02',
-                fontWeight:'700'
-              }}>{error}</Text>
+            <View>
+              <Text>{error}</Text>
             </View>
           )
         }
@@ -107,74 +72,39 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
   )
 }
 function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLogin, isLogin}){
-  const Reg = ()=>{
-    fetch('https://rgcstreamapp.onrender.com/api/v1/users/register',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:{
-        email:email,
-        password:password
-      }
-    }).then(res=>res.json())
-    .then((data)=>{
-      
-    })
-  }
-
   return(
-   <View
+    <Formik
+      initialValues={{email:'', password:''}}
+      onSubmit={(values)=>{
+        console.log(values)
+      }}
     >
-   
+      {({handleChange, handleBlur, handleSubmit, values})=>(
         <View
         style={{
-          width:Dimensions.get('window').width,
+          width:'100%',
           alignItems:'center',
           justifyContent:'center'
         }}
       >
-        <MyTextInput icon='mail' label='Email' placeholder='johndoe@gmail.com' onChangeText={(text)=>{setEmail(text)}}/>
-        <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} onChangeText={(text)=>{setPsd(text)}} setSecure={setSecure} placeholder='password'/>
+
+        <MyTextInput icon='mail' label='Email' placeholder='johndoe@gmail.com'/>
+        <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} setSecure={setSecure} placeholder='password'/>
         <View style={{marginTop:10, marginBottom:20}}>
-          <TouchableOpacity  onPress={()=>{setIsLogin('Reset')}}>
-            <Text style={{fontWeight:'800', alignSelf:'flex-end'}}>Forgot Password? <Text style={{color:'#0077b5'}}>Reset</Text></Text>
+          <TouchableOpacity
+            onPress={()=>{setIsLogin('Login')}}
+          >
+          <Text style={{fontWeight:'800'}}>Already Have An Account? <Text style={{color:'#0077b5'}}>Login</Text></Text>
           </TouchableOpacity>
         </View>
-        
-        {
-          error&&(
-            <View
-              style={{
-                alignItems:'center',
-                justifyContent:'center',
-                marginBottom:20
-              }}
-            >
-              <Text style={{
-                color:'#990F02',
-                fontWeight:'700'
-              }}>{error}</Text>
-            </View>
-          )
-        }
-        {
-          loading?(
-            <ActivityIndicator color='blue' size={30}/>
-          ):(
-            <TouchableOpacity
-          onPress={Register}
+        <TouchableOpacity
           style={styles.StyledButton}
-         
         >
-          <Text style={styles.buttonText}>Register</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-          )
-        }
-        
         </View>
-     
-    </View>
+      )}
+    </Formik>
   )
 }
 function ResetMail({email,setEmail, isReset, setIsReset, isLogin, setIsLogin}){
