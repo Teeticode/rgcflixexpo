@@ -14,45 +14,28 @@ import stream from '../assets/images/stream.png'
 import { StatusBar } from 'expo-status-bar'
 import { Formik } from 'formik'
 import { loginUser } from '../redux/slices/AuthSlice'
+import userLoginList from '../contexts/userLoginList'
 function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogin, isLogin, isReset, setIsReset}){
   const dispatch = useDispatch();
-  const [sub, setSub] = useState(false)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState(null)
   const [error, setError] = useState('')
-  useEffect(()=>{
-    if(sub === true){
-      const Login = ()=>{
+  const Log = async ({email,password, setLoading}) =>{
+    try{
         setLoading(true)
-        fetch('https://rgcstreamapp.onrender.com/api/v1/users/login',{
-          method:'POST',
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:JSON.stringify({
-            email:email,
-            password:password
-          })
-        }).then(response=>response.json())
-        .then((data)=>{
-          setLoading(false)
-          if(data.error){
-            setError(data.error)
-          }else{
-            setError(null)
-            setUser(data.user)
-          }
-        })
-        .catch(err=>{
-          console.log(err)
-        })
-        
-      }
-      Login()
-      setSub(false)
+        const res = await axios.post('https://rgcstreamapp.onrender.com/api/v1/users/login',{
+            email: email,
+            password: password
+        });
+        if(res){
+            setLoading(false)
+        }
+    }catch(error){
+        setLoading(false)
+        console.log(error)
     }
-  },[sub])
-  
+
+}
   return(
     <View
     >
@@ -93,7 +76,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
             <ActivityIndicator color='blue' size={30}/>
           ):(
             <TouchableOpacity
-          onPress={()=>{setSub(true)}}
+          onPress={()=>{Log({email:email,password:password, setLoading:setLoading})}}
           style={styles.StyledButton}
          
         >
@@ -124,8 +107,8 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
         'Content-Type':'application/json'
       },
       body:{
-        email: JSON.stringify(email),
-        password: JSON.stringify(password)
+        email:email,
+        password:password
       }
     }).then(res=>res.json())
     .then((data)=>{
@@ -133,12 +116,7 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
       if(data.error){
         setError(data.error)
       }
-      if(data.user){
-        setError(null)
-        console.log(data.user)
-      }
-    }).catch(err=>{
-      console.log(err)
+      console.log(data)
     })
   }
 
@@ -463,7 +441,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:10
+    marginRight:16
   },
   buttonText:{
     color:Colors.primary,

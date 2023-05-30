@@ -36,11 +36,12 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
         }).then(response=>response.json())
         .then((data)=>{
           setLoading(false)
+          console.log(data)
           if(data.error){
             setError(data.error)
           }else{
             setError(null)
-            setUser(data.user)
+            console.log(data)
           }
         })
         .catch(err=>{
@@ -52,7 +53,6 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
       setSub(false)
     }
   },[sub])
-  
   return(
     <View
     >

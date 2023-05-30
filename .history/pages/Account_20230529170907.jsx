@@ -16,43 +16,36 @@ import { Formik } from 'formik'
 import { loginUser } from '../redux/slices/AuthSlice'
 function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogin, isLogin, isReset, setIsReset}){
   const dispatch = useDispatch();
-  const [sub, setSub] = useState(false)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState(null)
   const [error, setError] = useState('')
-  useEffect(()=>{
-    if(sub === true){
-      const Login = ()=>{
-        setLoading(true)
-        fetch('https://rgcstreamapp.onrender.com/api/v1/users/login',{
-          method:'POST',
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:JSON.stringify({
-            email:email,
-            password:password
-          })
-        }).then(response=>response.json())
-        .then((data)=>{
-          setLoading(false)
-          if(data.error){
-            setError(data.error)
-          }else{
-            setError(null)
-            setUser(data.user)
-          }
-        })
-        .catch(err=>{
-          console.log(err)
-        })
-        
+  const Login = ()=>{
+    setLoading(true)
+    fetch('https://rgcstreamapp.onrender.com/api/v1/users/login',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        email:email,
+        password:password
+      })
+    })
+    .then((data)=>{
+      setLoading(false)
+      console.log(data)
+      if(data.error){
+        setError(data.error)
+      }else{
+        setError(null)
+        console.log(data)
       }
-      Login()
-      setSub(false)
-    }
-  },[sub])
-  
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+    
+  }
   return(
     <View
     >
@@ -93,7 +86,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
             <ActivityIndicator color='blue' size={30}/>
           ):(
             <TouchableOpacity
-          onPress={()=>{setSub(true)}}
+          onPress={Login}
           style={styles.StyledButton}
          
         >

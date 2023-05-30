@@ -21,7 +21,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
   const [user, setUser] = useState(null)
   const [error, setError] = useState('')
   useEffect(()=>{
-    if(sub === true){
+    
       const Login = ()=>{
         setLoading(true)
         fetch('https://rgcstreamapp.onrender.com/api/v1/users/login',{
@@ -36,23 +36,22 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
         }).then(response=>response.json())
         .then((data)=>{
           setLoading(false)
+          console.log(data)
           if(data.error){
             setError(data.error)
           }else{
             setError(null)
-            setUser(data.user)
+            console.log(data)
           }
         })
         .catch(err=>{
           console.log(err)
         })
         
-      }
+      
       Login()
-      setSub(false)
     }
   },[sub])
-  
   return(
     <View
     >
@@ -93,7 +92,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
             <ActivityIndicator color='blue' size={30}/>
           ):(
             <TouchableOpacity
-          onPress={()=>{setSub(true)}}
+          onPress={()=>{setSub(!sub)}}
           style={styles.StyledButton}
          
         >

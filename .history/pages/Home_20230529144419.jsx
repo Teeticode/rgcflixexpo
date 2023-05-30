@@ -4,7 +4,6 @@ import Carousel from '../components/Carousel'
 import { dummyData } from '../data'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons'
-import { TouchableOpacity } from 'react-native'
 export default function Home({navigation}) {
   return (
     <SafeAreaView>
@@ -18,11 +17,9 @@ export default function Home({navigation}) {
             }}
           >
             <View>
-              <TouchableOpacity onPress={()=>{navigation.replace('Account')}}>
-              <Ionicons name='arrow-back-outline' size={30} color='black' style={{
+              <Ionicons name='arrow-back-outline' size={30} color={black} style={{
                 fontWeight:'800'
               }}/>
-              </TouchableOpacity>
             </View>
           </View>
           <Carousel data={dummyData}/>

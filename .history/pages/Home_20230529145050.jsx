@@ -18,7 +18,7 @@ export default function Home({navigation}) {
             }}
           >
             <View>
-              <TouchableOpacity onPress={()=>{navigation.replace('Account')}}>
+              <TouchableOpacity onPress={()=>{navigation.replace('Login')}}>
               <Ionicons name='arrow-back-outline' size={30} color='black' style={{
                 fontWeight:'800'
               }}/>

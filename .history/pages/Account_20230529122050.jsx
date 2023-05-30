@@ -16,43 +16,36 @@ import { Formik } from 'formik'
 import { loginUser } from '../redux/slices/AuthSlice'
 function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogin, isLogin, isReset, setIsReset}){
   const dispatch = useDispatch();
-  const [sub, setSub] = useState(false)
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState(null)
   const [error, setError] = useState('')
-  useEffect(()=>{
-    if(sub === true){
-      const Login = ()=>{
-        setLoading(true)
-        fetch('https://rgcstreamapp.onrender.com/api/v1/users/login',{
-          method:'POST',
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:JSON.stringify({
-            email:email,
-            password:password
-          })
-        }).then(response=>response.json())
-        .then((data)=>{
-          setLoading(false)
-          if(data.error){
-            setError(data.error)
-          }else{
-            setError(null)
-            setUser(data.user)
-          }
-        })
-        .catch(err=>{
-          console.log(err)
-        })
-        
+  const Login = ()=>{
+    setLoading(true)
+    fetch('https://rgcstreamapp.onrender.com/api/v1/users/login',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:{
+        email:email,
+        password:password
       }
-      Login()
-      setSub(false)
-    }
-  },[sub])
-  
+    }).then(res=>res.json())
+    .then((data)=>{
+      setLoading(false)
+      console.log(data)
+      if(data.error){
+        setError(data.error)
+      }else{
+        setError(null)
+        console.log(data)
+      }
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+    
+  }
   return(
     <View
     >
@@ -93,7 +86,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
             <ActivityIndicator color='blue' size={30}/>
           ):(
             <TouchableOpacity
-          onPress={()=>{setSub(true)}}
+          onPress={Login}
           style={styles.StyledButton}
          
         >
@@ -115,7 +108,6 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
 }
 function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLogin, isLogin}){
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
   const Reg = ()=>{
     setLoading(true)
     fetch('https://rgcstreamapp.onrender.com/api/v1/users/register',{
@@ -124,21 +116,13 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
         'Content-Type':'application/json'
       },
       body:{
-        email: JSON.stringify(email),
-        password: JSON.stringify(password)
+        email:email,
+        password:password
       }
     }).then(res=>res.json())
     .then((data)=>{
       setLoading(false)
-      if(data.error){
-        setError(data.error)
-      }
-      if(data.user){
-        setError(null)
-        console.log(data.user)
-      }
-    }).catch(err=>{
-      console.log(err)
+      console.log(data)
     })
   }
 
@@ -156,8 +140,8 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
         <MyTextInput icon='mail' label='Email' placeholder='johndoe@gmail.com' onChangeText={(text)=>{setEmail(text)}}/>
         <MyTextInput icon='key' label='Password' isSecure={isSecure} secureTextEntry={isSecure} onChangeText={(text)=>{setPsd(text)}} setSecure={setSecure} placeholder='password'/>
         <View style={{marginTop:10, marginBottom:20}}>
-          <TouchableOpacity  onPress={()=>{setIsLogin('Login')}}>
-            <Text style={{fontWeight:'800', alignSelf:'flex-end'}}>Already Have An Account? <Text style={{color:'#0077b5'}}>Login</Text></Text>
+          <TouchableOpacity  onPress={()=>{setIsLogin('Reset')}}>
+            <Text style={{fontWeight:'800', alignSelf:'flex-end'}}>Forgot Password? <Text style={{color:'#0077b5'}}>Reset</Text></Text>
           </TouchableOpacity>
         </View>
         
@@ -463,7 +447,7 @@ const styles = StyleSheet.create({
     marginVertical:5,
     height:60,
     width:'50%',
-    marginRight:10
+    marginRight:16
   },
   buttonText:{
     color:Colors.primary,
