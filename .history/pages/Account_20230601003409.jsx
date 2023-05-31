@@ -251,43 +251,17 @@ export default function Account({navigation}) {
           
           showsVerticalScrollIndicator={false}
         >
-          <StatusBar style='light' hidden={true}/>
+          <StatusBar style='dark'/>
           <SafeAreaView
             
           >
             <View
             style={{
-              marginRight:16
+              marginRight:24,
+              marginTop:10
             }}
             >
-            <View
-                style={{
-                  alignSelf:'flex-end',
-                  margin:0,
-                  position:'relative',
-                  marginTop:15,
-                  marginBottom:40,
-                  marginLeft:18
-                }}
-              >
-                <TouchableOpacity
-                  style={{
-                    width:40,
-                    height:40,
-                    borderRadius:20,
-                    alignItems:'center',
-                    backgroundColor:Colors.secondary
-                  }}
-                  onPress={()=>{navigation.replace('Home')}}
-                >
-                <Ionicons
-                  name="close-outline"
-                  size={35}
-                  color='grey'
-                  style={{alignSelf:'center'}}
-                />
-                </TouchableOpacity>
-            </View>
+            
             <View
               style={styles.container}
             >
@@ -385,7 +359,7 @@ const MyTextInput = ({setSecure,isSecure,label, icon, ...props})=>{
   return(
     <View
       style={{
-        width:'90%',
+        width:'80%',
         
       }}
     >
@@ -462,7 +436,7 @@ const styles = StyleSheet.create({
     zIndex:1
   },
   RightIcon:{
-    right:35,
+    right:15,
     top:40,
     position:'absolute',
     zIndex:1

@@ -257,7 +257,7 @@ export default function Account({navigation}) {
           >
             <View
             style={{
-              marginRight:16
+              marginRight:15
             }}
             >
             <View
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
     zIndex:1
   },
   RightIcon:{
-    right:35,
+    right:25,
     top:40,
     position:'absolute',
     zIndex:1

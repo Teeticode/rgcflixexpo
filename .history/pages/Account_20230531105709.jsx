@@ -10,7 +10,7 @@ import { Ionicons, MaterialCommunityIcons, Octicons } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { Colors, StyledContainer } from '../config/styles'
 import { SvgCssUri } from 'react-native-svg';
-import stream from '../assets/icons/mobile-tv.png'
+import stream from '../assets/images/stream.png'
 import { StatusBar } from 'expo-status-bar'
 import { Formik } from 'formik'
 import { loginUser } from '../redux/slices/AuthSlice'
@@ -24,7 +24,7 @@ function Login({email,setEmail, password, setPsd, isSecure, setSecure, setIsLogi
     if(sub === true){
       const Login = ()=>{
         setLoading(true)
-        fetch('https://rgcstreamapp.onrender.com/api/v1/users/login',{
+        fetch(URL:'https://rgcstreamapp.onrender.com/api/v1/users/login',{
           method:'POST',
           headers:{
             'Content-Type':'application/json'
@@ -179,7 +179,7 @@ function Register({email,setEmail, password, setPsd, isSecure, setSecure,setIsLo
         }
         {
           loading?(
-            <ActivityIndicator style={{fontWeight:'bold'}} color='blue' size={30}/>
+            <ActivityIndicator color='blue' size={30}/>
           ):(
             <TouchableOpacity
           onPress={Reg}
@@ -251,23 +251,12 @@ export default function Account({navigation}) {
           
           showsVerticalScrollIndicator={false}
         >
-          <StatusBar style='light' hidden={true}/>
-          <SafeAreaView
-            
-          >
-            <View
-            style={{
-              marginRight:16
-            }}
-            >
+          <StatusBar style='dark'/>
+          <SafeAreaView>
             <View
                 style={{
                   alignSelf:'flex-end',
-                  margin:0,
-                  position:'relative',
-                  marginTop:15,
-                  marginBottom:40,
-                  marginLeft:18
+                  margin:6,
                 }}
               >
                 <TouchableOpacity
@@ -275,8 +264,8 @@ export default function Account({navigation}) {
                     width:40,
                     height:40,
                     borderRadius:20,
-                    alignItems:'center',
-                    backgroundColor:Colors.secondary
+                    backgroundColor:Colors.secondary,
+                    alignItems:'center'
                   }}
                   onPress={()=>{navigation.replace('Home')}}
                 >
@@ -297,12 +286,12 @@ export default function Account({navigation}) {
                   style={{alignItems:'center', justifyContent:'center', marginRight:16}}
                  >
                    <Image style={{
-                    width:80,
-                    height:80
+                    width:Dimensions.get('window').width/2.5,
+                    height:Dimensions.get('window').height/4.5
                   }}
                   source={stream}
                   />
-                  <Text style={styles.pageTitle}>Rgc Stream</Text>
+                  <Text style={styles.pageTitle}>Stream Fast</Text>
                   {
                     isLogin==='Login' &&(
                       <Text style={styles.subTitle}>Account Login</Text>
@@ -373,7 +362,6 @@ export default function Account({navigation}) {
               
             
             </View>
-            </View>
       
           </SafeAreaView>
         </ScrollView>
@@ -385,7 +373,7 @@ const MyTextInput = ({setSecure,isSecure,label, icon, ...props})=>{
   return(
     <View
       style={{
-        width:'90%',
+        width:'80%',
         
       }}
     >
@@ -462,7 +450,7 @@ const styles = StyleSheet.create({
     zIndex:1
   },
   RightIcon:{
-    right:35,
+    right:15,
     top:40,
     position:'absolute',
     zIndex:1

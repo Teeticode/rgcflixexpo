@@ -257,7 +257,7 @@ export default function Account({navigation}) {
           >
             <View
             style={{
-              marginRight:16
+              marginRight:15
             }}
             >
             <View

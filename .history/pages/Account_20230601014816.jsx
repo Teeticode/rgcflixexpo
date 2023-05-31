@@ -257,7 +257,7 @@ export default function Account({navigation}) {
           >
             <View
             style={{
-              marginRight:16
+              marginRight:9
             }}
             >
             <View
@@ -265,7 +265,7 @@ export default function Account({navigation}) {
                   alignSelf:'flex-end',
                   margin:0,
                   position:'relative',
-                  marginTop:15,
+                  marginTop:10,
                   marginBottom:40,
                   marginLeft:18
                 }}
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
     zIndex:1
   },
   RightIcon:{
-    right:35,
+    right:15,
     top:40,
     position:'absolute',
     zIndex:1

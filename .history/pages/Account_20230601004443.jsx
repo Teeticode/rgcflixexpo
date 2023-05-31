@@ -257,17 +257,14 @@ export default function Account({navigation}) {
           >
             <View
             style={{
-              marginRight:16
+              marginRight:15
             }}
             >
             <View
                 style={{
                   alignSelf:'flex-end',
-                  margin:0,
-                  position:'relative',
-                  marginTop:15,
-                  marginBottom:40,
-                  marginLeft:18
+                  margin:6,
+                  position:'relative'
                 }}
               >
                 <TouchableOpacity
@@ -385,7 +382,7 @@ const MyTextInput = ({setSecure,isSecure,label, icon, ...props})=>{
   return(
     <View
       style={{
-        width:'90%',
+        width:'80%',
         
       }}
     >
@@ -462,7 +459,7 @@ const styles = StyleSheet.create({
     zIndex:1
   },
   RightIcon:{
-    right:35,
+    right:15,
     top:40,
     position:'absolute',
     zIndex:1
